@@ -1,4 +1,3 @@
-
 class Request {
    public user: string | null;
    public userRole: string;

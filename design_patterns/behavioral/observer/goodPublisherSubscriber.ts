@@ -1,5 +1,4 @@
 
-
 // Step 1 — Observer interface
 // every subscriber must implement this
 // channel only knows this interface — nothing else
