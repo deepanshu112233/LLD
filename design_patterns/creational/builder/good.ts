@@ -3,11 +3,14 @@ Builder Pattern Solution
 Idea: Construct objects step by step using a builder.
 
 The static keyword:
-    -   It is a modifier that makes a member (variable, method, or nested class) belong to the class itself, 
-        rather than to any specific instance (object) of that class. This means that the 
-        member is shared by all instances of the class and can be accessed without creating an object.
-    
-    -   You can access static members using the class name directly (e.g., ClassName.methodName()) without using the new keyword to create an object.
+-   It is a modifier that makes a member (variable, method, or nested class) belong to the class itself, 
+    rather than to any specific instance (object) of that class. 
+
+    This means that the member is shared by all instances of the class 
+    and can be accessed without creating an object.
+
+-   You can access static members using the class name directly (e.g., ClassName.methodName()) 
+    without using the new keyword to create an object.
 
 With static keyword
     new Vehicle.Builder("SUV")  // ✅ access directly on the class

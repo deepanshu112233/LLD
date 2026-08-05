@@ -1,15 +1,19 @@
 /*
 The Singleton pattern ensures only one instance of a class exists throughout the application, 
 with a global access point to it.
+When an object represents a single shared resource or piece of global state, 
+and having two of them would be wrong or wasteful — not just "a style preference
 */
 
 /*
 static — lives on the class itself, not on any instance. 
         There's only ever one copy of it in memory, shared across everything.
         called on the class, not an instance:
-This has to be static because if it weren't, you'd need an instance to call it — but you can't create an instance without it.
+This has to be static because if it weren't, 
+you'd need an instance to call it — but you can't create an instance without it.
 
-private constructor — prevents outside code from creating new instances, ensuring the class controls its own instantiation.
+private constructor — prevents outside code from creating new instances, 
+ensuring the class controls its own instantiation.
 
 */
 class Database {

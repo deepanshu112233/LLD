@@ -45,3 +45,4 @@ if(c1==c2) console.log("Same instance")
 c1.increament()
 c1.getCounter() // 2
 c2.getCounter() // 2
+

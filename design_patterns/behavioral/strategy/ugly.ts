@@ -1,5 +1,6 @@
 // 1. The Problem: Shipping Cost Calculation
-// Imagine you are building an e-commerce platform. One of the features you need is a shipping cost calculator. Sounds simple enough, but shipping costs can be calculated in many different ways depending on business rules:
+// Imagine you are building an e-commerce platform. One of the features you need is a shipping cost calculator. 
+// Sounds simple enough, but shipping costs can be calculated in many different ways depending on business rules:
 // * Flat Rate: A fixed fee regardless of weight or distance
 // * Weight-Based: Cost increases with package weight
 // * Distance-Based: Different rates for different delivery zones

@@ -40,7 +40,12 @@ class CacheManager {
 }
 
 // ES module singleton
+// only the instance is exported — `CacheManager` (the class) stays private to this file,
+// so no other file can do `new CacheManager()` and create a second, out-of-sync cache.
+// (`export =` used instead of `export const` because this file compiles as CommonJS —
+// no package.json declares "type": "module" — and verbatimModuleSyntax requires CJS-shaped syntax.)
 const cacheManager = new CacheManager();
+export = cacheManager;
 
 // --- Main ---
 const cache1 = cacheManager;

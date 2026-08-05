@@ -54,6 +54,11 @@ class Bike implements Vehicle{
     }   
 }
 
+// Problem is client is writing new keyowrd to create object of class. 
+// This is not good design. Client should not know about the class names. 
+// Client should only ask for a vehicle and factory should give it.
+const obj= new Bike()
+console.log(obj.start()+"\n"+obj.stop())
 
 //Client code
 function createVehicle(type:string):Vehicle{
@@ -73,6 +78,9 @@ const myCar = createVehicle('car')
 myCar.start() // Output: Car started
 myCar.stop()  // Output: Car stopped
 
+// const myTruck = createVehicle('truck')
+// myTruck.start() // Output: Truck started
+// myTruck.stop()  // Output: Truck stopped
 
 /*
 Hard to extend
