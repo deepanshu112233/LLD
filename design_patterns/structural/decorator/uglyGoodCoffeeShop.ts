@@ -32,9 +32,15 @@ class Espresso implements Coffee {
 
 //Step 3: Abstract Base Decorator: To avoid code duplication. It implements the same interface and has a field to hold the wrapped component. 
 //The concrete decorators will extend this and only override the methods they want to change.
-class CoffeeDecorator implements Coffee{
+abstract class CoffeeDecorator implements Coffee{
     protected coffee: Coffee
 
+    /*
+    Sugar/Caramel/WhipCream use this.coffee directly: they bypass the parent entirely and 
+    go straight to the wrapped object. This works fine only because coffee is protected (line 36) —
+     visible to subclasses. If it were private, this would fail to compile.
+    */
+   
     constructor(coffee: Coffee) {
         this.coffee = coffee
     }
@@ -52,6 +58,9 @@ class MilkDecorator extends CoffeeDecorator {
         return super.description() + ", Milk"    
     }
 }
+
+// Functionality wise, super.cost() and super.description() are equivalent to this.coffee.cost() and this.coffee.description().
+// But using super is a better design choice because it allows the decorator to be more flexible and composable.
 
 class Sugar extends CoffeeDecorator {
     cost(): number {

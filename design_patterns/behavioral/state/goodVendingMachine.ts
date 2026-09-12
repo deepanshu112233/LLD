@@ -17,7 +17,7 @@ class VendingMachine {
   private state: State;
 
   constructor() {
-    this.state = new NoMoneyState(this); // initial state
+    this.state = new IdleState(this); // initial state
   }
 
   setState(state: State) {
@@ -42,14 +42,17 @@ class VendingMachine {
 // Now we create concrete state classes for each state of the vending machine. 
 // Each class will implement the State interface and define the behavior for that state.
 
+// price of the item — same threshold ugly.ts gates selectItem() on
+const PRICE = 20;
+
 // ── State 1: Idle ────────────────────────────────────────
 // machine is waiting — no coins inserted yet
-class NoMoneyState implements State {
+class IdleState implements State {
   constructor(private machine: VendingMachine) {}
 
   insertMoney(amount: number): void {
     console.log(`Inserted ₹${amount}`);
-    this.machine.setState(new HasMoneyState(this.machine)); // move state
+    this.machine.setState(new HasMoneyState(this.machine, amount)); // move state, carry balance
   }
 
   selectProduct(): void {
@@ -64,13 +67,19 @@ class NoMoneyState implements State {
 // ── State 2: HasCoins ────────────────────────────────────
 // coins inserted — waiting for item selection
 class HasMoneyState implements State {
-  constructor(private machine: VendingMachine) {}
+  constructor(private machine: VendingMachine, private balance: number) {}
 
   insertMoney(amount: number): void {
-    console.log("Money already inserted");
+    const total = this.balance + amount;
+    console.log(`Added ₹${amount}, total ₹${total}`);
+    this.machine.setState(new HasMoneyState(this.machine, total));
   }
 
   selectProduct(): void {
+    if (this.balance < PRICE) {
+      console.log("Insufficient balance");
+      return;
+    }
     console.log("Product selected");
     this.machine.setState(new DispensingState(this.machine)); // next state
   }
@@ -96,7 +105,7 @@ class DispensingState implements State {
 
   dispense(): void {
     console.log("Dispensing product...");
-    this.machine.setState(new NoMoneyState(this.machine)); // reset
+    this.machine.setState(new IdleState(this.machine)); // reset
   }
 }
 
@@ -104,7 +113,9 @@ class DispensingState implements State {
 const vm = new VendingMachine();
 
 vm.selectProduct(); // no money
-vm.insertMoney(50); // insert
+vm.insertMoney(10); // insert, balance ₹10
+vm.selectProduct(); // balance < ₹20 → insufficient
+vm.insertMoney(10); // insert, balance ₹20
 vm.selectProduct(); // select
 vm.dispense();      // dispense
 

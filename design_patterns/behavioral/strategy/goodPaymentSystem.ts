@@ -54,12 +54,12 @@ class WalletPayment implements PaymentStrategy {
 class Checkout {
     private strategy: PaymentStrategy
 
-    constructor(strategy: PaymentStrategy) {
-        this.strategy = strategy
+    constructor(arg: PaymentStrategy) {
+        this.strategy = arg
     }
 
-    setPaymentMethod(strategy: PaymentStrategy): void {
-        this.strategy = strategy
+    setPaymentMethod(method: PaymentStrategy): void {
+        this.strategy = method
     }
 
     placeOrder(amount: number): void {

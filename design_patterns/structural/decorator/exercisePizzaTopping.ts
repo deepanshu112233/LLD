@@ -45,28 +45,34 @@ abstract class PizzaDecorator implements Pizza{
 
 class CheeseDecorator extends PizzaDecorator{
     getCost(): number {
-        return this.pizza.getCost()+1.50
+        // return this.pizza.getCost()+1.50
+        return super.getCost()+1.50
     }
     getDescription(): string {
-        return this.pizza.getDescription()+" + Cheese"
+        // return this.pizza.getDescription()+" + Cheese"
+        return super.getDescription()+" + Cheese"
     }
 }
 
 class PepperoniDecorator extends PizzaDecorator{
     getCost(): number {
-        return this.pizza.getCost()+2.00
+        // return this.pizza.getCost()+2.00
+        return super.getCost()+2.00
     }
     getDescription(): string {
-        return this.pizza.getDescription()+" + Pepperoni"
+        // return this.pizza.getDescription()+" + Pepperoni"
+        return super.getDescription()+" + Pepperoni"
     }
 }
 
 class MushroomDecorator extends PizzaDecorator{
     getCost(): number {
-        return this.pizza.getCost()+1.00
+        // return this.pizza.getCost()+1.00
+        return super.getCost()+1.00
     }
     getDescription(): string {
-        return this.pizza.getDescription()+" + Mushroom"
+        // return this.pizza.getDescription()+" + Mushroom"
+        return super.getDescription()+" + Mushroom"
     }
 }
 

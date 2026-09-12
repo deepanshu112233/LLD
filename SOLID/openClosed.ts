@@ -65,6 +65,8 @@ class CheckoutService {
         processor.process(method, amount);
     }
 }
+// const d = new PaymentProcessor();
+// d.process(new CreditCardPayment(), 100.00);
 
 const checkout = new CheckoutService();
 checkout.processPayment(new CreditCardPayment(), 100.00);

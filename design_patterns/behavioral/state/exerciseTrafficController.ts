@@ -18,6 +18,25 @@ Requirements:
 interface TrafficLightState{
     change(context: TrafficLight): void
 }
+/*
+delegates work to whichever state is current, and exposes setState() 
+so states can swap themselves out.
+a TrafficLight HAS a state not IS a state
+*/
+class TrafficLight {
+    private state: TrafficLightState
+    constructor(){
+        this.state = new RedState() // initial state
+    }
+    setState(state: TrafficLightState){
+        this.state=state
+    }
+    change(){
+        this.state.change(this) 
+        //TrafficLight says: “Hey current state, YOU decide what to do next”
+    }
+
+}
 
 class RedState implements TrafficLightState{
     change(context: TrafficLight): void {
@@ -36,21 +55,6 @@ class YellowState implements TrafficLightState{
         console.log("Yellow light - Slow down")
         context.setState(new RedState())
     }
-}
-
-class TrafficLight {
-    private state: TrafficLightState
-    constructor(){
-        this.state = new RedState() // initial state
-    }
-    setState(state: TrafficLightState){
-        this.state=state
-    }
-    change(){
-        this.state.change(this) 
-        //TrafficLight says: “Hey current state, YOU decide what to do next”
-    }
-
 }
 
 const trafficLight = new TrafficLight()

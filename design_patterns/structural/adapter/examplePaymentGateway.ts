@@ -1,4 +1,8 @@
 // Your app's standard payment interface
+/*
+Adapter is one purpose, N incompatible interfaces to translate. 
+Strategy is N purposes, one shared interface to choose between.
+*/
 interface PaymentProcessor {
     charge(amount: number, currency: string): boolean
     refund(transactionId: string): boolean

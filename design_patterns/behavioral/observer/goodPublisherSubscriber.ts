@@ -1,7 +1,7 @@
 
 // Step 1 — Observer interface
 // every subscriber must implement this
-// channel only knows this interface — nothing else
+// channel only knows this interface — nothing else, observer = subscriber basically
 interface Observer {
     // called by subject when something changes
     // videoTitle is the data being broadcast

@@ -125,3 +125,65 @@ const bike = new Vehicle.Builder("bike")
     .build()
 
 console.log(bike.describe())
+
+// Building multiple vehicles from data — using map
+type VehicleConfig = {
+    type: string
+    engine?: string
+    wheels?: number
+    color?: string
+    gps?: boolean
+    sunroof?: boolean
+    airbags?: number
+}
+
+const configs: VehicleConfig[] = [
+    { type: "SUV",   engine: "v8", color: "black", gps: true, sunroof: true, airbags: 6 },
+    { type: "bike",  wheels: 2, color: "red" },
+    { type: "sedan", engine: "v6", color: "white", airbags: 2 },
+]
+
+const vehicles: Vehicle[] = configs.map(cfg => {
+    const builder = new Vehicle.Builder(cfg.type)
+    if (cfg.engine)  builder.setEngine(cfg.engine)
+    if (cfg.wheels)  builder.setWheels(cfg.wheels)
+    if (cfg.color)   builder.setColor(cfg.color)
+    if (cfg.gps)     builder.setGPS(cfg.gps)
+    if (cfg.sunroof) builder.setSunroof(cfg.sunroof)
+    if (cfg.airbags) builder.setAirbags(cfg.airbags)
+    return builder.build()
+})
+
+vehicles.forEach(v => console.log(v.describe()))
+
+// Usage 2 — same 3 vehicles, built the "ugly" way (no config array, no map)
+// Every vehicle is spelled out by hand — compare this to the map version above
+// to see why driving construction from data is better once the list grows.
+const uglySuv = new Vehicle.Builder("SUV")
+    .setEngine("v8")
+    .setColor("black")
+    .setGPS(true)
+    .setSunroof(true)
+    .setAirbags(6)
+    .build()
+
+const uglyBike = new Vehicle.Builder("bike")
+    .setWheels(2)
+    .setColor("red")
+    .build()
+
+const uglySedan = new Vehicle.Builder("sedan")
+    .setEngine("v6")
+    .setColor("white")
+    .setAirbags(2)
+    .build()
+
+const uglyVehicles: Vehicle[] = []
+uglyVehicles.push(uglySuv)
+uglyVehicles.push(uglyBike)
+uglyVehicles.push(uglySedan)
+
+uglyVehicles.forEach(v => console.log(v.describe()))
+// Problems: adding a 4th vehicle means copy-pasting a whole builder chain,
+// there's no single source of truth for "what a vehicle needs", and the
+// building logic (builder chain) is duplicated instead of reused per config.

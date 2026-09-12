@@ -17,7 +17,7 @@ class WeightBasedStrategy implements ShippingStrategy {
     }
 }
 class DistanceBasedStrategy implements ShippingStrategy {
-    calculate(_: number, zone: number): number {
+    calculate(zone: number): number {
         if (zone === 1) return 40
         if (zone === 2) return 80
         if (zone === 3) return 150
